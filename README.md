@@ -1,7 +1,11 @@
 # ampe_stor
 Driver for Alcor Micro PCI-Express card reader
 plus concerning gentoo ebuild to build the kernel module...
-(works at least with my gentoo-sources-4.12.6 kernel)
+
+ - works at least - not very stable - with my gentoo-sources-4.12.6 kernel
+ - up to now several hangups / ro-remounts during copy actions from my 64GB sdcard (vfat) to harddisk 
+(don't try to repair the sdcard file system in case the systems tells you that the file system of sdcard is corrupt... then it's really corrupt)
+
 
 
 Copyright(c) 2012 Alcor Micro Corp. All rights reserved.
