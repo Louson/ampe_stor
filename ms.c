@@ -31,7 +31,7 @@ int ms_add_device(struct _DEVICE_EXTENSION *pdx)
 	//KeInitializeTimerEx(&ms->timeout_timer, NotificationTimer);
 	//KeInitializeDpc(&ms->timeout_tasklet, ms_tasklet_timeout, pdx);
 
-	setup_timer(&ms->timeout_timer, ms_tasklet_timeout, (unsigned long)pdx);
+	timer_setup(&ms->timeout_timer, ms_tasklet_timeout, 0);
 
 	/* debug to force to pio mode */
 	ms->flags |= MS_SUPPORT_DMA;
@@ -1019,10 +1019,10 @@ void ms_tasklet_card(unsigned long parm)
 }
 
 /*************************************************************************************************/
-void ms_tasklet_timeout(unsigned long parm)
+void ms_tasklet_timeout(struct timer_list *t)
 {
-	struct _DEVICE_EXTENSION *pdx = (struct _DEVICE_EXTENSION *)parm;
-	struct ms_host *ms = pdx->ms;
+	struct ms_host *ms;
+	ms = from_timer(ms, t, timeout_timer);
 
 	TRACEW(("ms_tasklet_timeout ===>"));
 	ms_dumpregs(ms);
