@@ -30,6 +30,8 @@ obj-m += $(TARGET_MODULE).o
 
 $(TARGET_MODULE)-objs := amcr_stor.o  amcr_scsi.o  general.o sd.o ms.o
 
+KDIR := /lib/modules/$(shell uname -r)/build
+PWD := $(shell pwd)
 
 all:
 	$(MAKE) -C $(KDIR) M=$(PWD) modules
